@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <title>Lista de Evento</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+
+<body class="container mt-5">
+    <h1 class="mb-4">📚 Eventos</h1>
+    <a href="{% url 'crear_evento' %}" class="btn btn-primary mb-3">➕ Nuevo Evento</a>
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>Lugar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for evento in eventos %}
+            <tr>
+                <td>{{ evento.nombre }}</td>
+                <td>{{ evento.fecha }}</td>
+                <td>{{ evento.lugar }}</td>
+                <td>
+                    <a href="{% url 'editar_evento' evento.pk %}" class="btn btn-warning btn-sm">✏ Editar</a>
+                    <a href="{% url 'eliminar_evento' evento.pk %}" class="btn btn-danger btn-sm">🗑 Eliminar</a>
+                    <a href="{% url 'asignar_organizador' evento.pk %}" class="btn btn-success btn-sm">📌 Asignar Organizador</a>
+                </td>
+            </tr>
+            {% if evento.organizadores.all %}
+            <tr>
+                <td colspan="5">
+                    <ul class="list-group">
+                        {% for organizador in evento.organizadores.all %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <span>{{ organizadores.nombre }} - {{ organizadores.contacto }}</span>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>

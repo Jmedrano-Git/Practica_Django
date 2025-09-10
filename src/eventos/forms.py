@@ -5,7 +5,7 @@ from .models import EventosDB, OrganizadoresDB
 class EventosForm(forms.ModelForm):
     class Meta:
         model = EventosDB
-        fields = ['nombre', 'fecha', 'lugar']
+        fields = ['nombre', 'lugar']
 
 
 class OrganizadoresForm(forms.ModelForm):
